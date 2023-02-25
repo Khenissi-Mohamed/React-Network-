@@ -6,7 +6,7 @@ function Header() {
   // const [title, setTitle] = useState("react network")
 
 
-  const title = "react network"
+  const title = "React network"
 
     return (
       <div>

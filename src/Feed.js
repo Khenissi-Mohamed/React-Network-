@@ -30,6 +30,9 @@ function Feed() {
         console.log("posts", posts);
       }
 
+      const addPost = (post) => {
+        setPosts([...posts, post])
+      }
 
     return posts.length > 0 ? 
     (
