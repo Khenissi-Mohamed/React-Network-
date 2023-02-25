@@ -4,7 +4,7 @@ import Header from "./Header"
 
 // const [posts, setPosts] = useState()
 
-const posts = [
+const initialPosts = [
   {id: 12,
   text: "Bonjour tout le monde !",
   author: "Hugo Bordes",
@@ -23,13 +23,19 @@ const posts = [
 ]
 
 function App() {
-  const textPost1 = "bonjour tt lmonde"
+  
+  const [posts, setPosts] = useState(initialPosts)
+
+  const deletePost = (id) => {
+    setPosts(posts.filter(p => p.id != id))
+    console.log("posts", posts);
+  }
+
   return (
     <>
     <Header />
     <h1>Fil d'actualité :</h1>
-    {posts.map(p =>
-       <Post key={p.id} postData={p} />)}
+    {posts.map(p => <Post key={p.id} postData={p} deletePost={deletePost} />)}
     </>
   )
 }

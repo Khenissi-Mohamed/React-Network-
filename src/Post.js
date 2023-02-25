@@ -1,12 +1,15 @@
-import PropTypes from 'prop-types'
+
 import { useState } from 'react'
 
-function Post({text, author, likes, postData}) {
+function Post({postData, deletePost}) {
 
   const [nbLikes, setNbLikes] = useState(postData.likes)
-
-  const addLikesHandler = () => {
-    setNbLikes(nbLikes +1 )
+  const [isLiked, setisLiked] = useState(false)
+  
+  const likePost = () => {
+    const increment = isLiked ? -1 : 1
+    setNbLikes(nbLikes + increment )
+    setisLiked(!isLiked)
   }
 
     return (
@@ -14,15 +17,11 @@ function Post({text, author, likes, postData}) {
         {postData.author}<br />
         {postData.text}<br />
         {nbLikes} likes<br />
-        <button onClick={addLikesHandler}>J'aime</button>
+        <button onClick={likePost}> {isLiked ? "Vous aimez ce post" : "jaime"} </button>
+        <button onClick={() => deletePost(postData.id) } >Supprimer le post</button>
       </div>
     )
   }
 
-Post.propTypes = {
-  text: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  likes: PropTypes.number.isRequired
-}
 
   export default Post
