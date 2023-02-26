@@ -43,7 +43,7 @@ function App() {
 
 // Suppression à l'aide de la methode filter
   const deletePost = (id) => {
-    setPosts(posts.filter(p => p.id != id))
+    setPosts(posts.filter(p => p.id !== id))
     // console.log("posts", posts);
   }
 

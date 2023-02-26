@@ -14,7 +14,7 @@ function Post({postData, deletePost}) {
 
     return (
       <div>
-        <img src={postData.authorPicture} /><br />
+        <img src={postData.authorPicture} alt="Post picture" /><br />
         {postData.author}<br />
         {moment(postData.date).format('HH:mm')} <br />
         {postData.text}<br />

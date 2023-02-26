@@ -1,10 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function CreatePost({addPost}) {
 
 
     const [postText, setPostText] = useState('')
     const [postPicture, setPostPicture] = useState('')
+
+    
+    useEffect(() => console.log("bojour", postText), [postText])
 
     const onPostTextHandler = (event) => {
      setPostText(event.target.value)
