@@ -2,7 +2,7 @@
 import Header from "./Header"
 import Feed from "./Feed"
 import CreatePost from "./CreatePost"
-import {useState} from 'react'
+import {useState, useEffect } from 'react'
 
 
 const initialPosts = [
@@ -32,6 +32,16 @@ const initialPosts = [
   },
 ]
 
+const bouchonBackend = () => {
+  
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("backend return...")
+      resolve(initialPosts)
+    }, 2000);
+  })
+}
+
 const currentUser = {
   author: "Nouvel utilisateur",
   authorPicture: "https://picsum.photos/seed/profile53/50/50"
@@ -39,7 +49,15 @@ const currentUser = {
 
 function App() {
 
-  const [posts, setPosts] = useState(initialPosts)
+  const [posts, setPosts] = useState([])
+  const [isLoading, setIsloading] = useState(true)
+
+  useEffect(() => {
+    bouchonBackend().then(posts =>  {
+      setPosts(posts)
+      setIsloading(false)
+      })
+    }, [])
 
 // Suppression à l'aide de la methode filter
   const deletePost = (id) => {
@@ -66,7 +84,7 @@ function App() {
     <>
     <Header />
     <CreatePost addPost={addPost} />
-    <Feed posts={posts} deletePost={deletePost} />
+    <Feed posts={posts} deletePost={deletePost} isLoading={isLoading} />
     
     </>
   )
