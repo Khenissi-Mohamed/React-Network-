@@ -4,26 +4,33 @@ function CreatePost({addPost}) {
 
 
     const [postText, setPostText] = useState('')
+    const [postPicture, setPostPicture] = useState('')
 
-    const onChangeHandler = (event) => {
+    const onPostTextHandler = (event) => {
      setPostText(event.target.value)
     //  console.log(event.target.value)
     }
+
+    const onPictureChangeHandler = (event) => {
+      setPostPicture(event.target.value)
+     //  console.log(event.target.value)
+     }
     const createPostHandler = (event) => {
-      const newPost = {
-        id: Math.floor(1000 * Math.random()) ,
-        text: postText,
-        author: "Nouvel utilisateur",
-        likes: 0
-        }
-      addPost(newPost)
+      addPost(postText, postPicture)
+      // permet de repartir avec un champs vide apres le click sur le btn publication
+      setPostText('')
+      setPostPicture('')
     }
 
   return (
     <>
     <div>Nouveau post</div>
-    <input onChange={onChangeHandler} type={postText} />
-    <button onClick={createPostHandler}>Publier</button>
+    Texte : <input onChange={onPostTextHandler} type={postText} value={postText} /> <br />
+    Image : <input onChange={onPictureChangeHandler} type={postText} value={postPicture} />
+    {/* trim() est une fonction js qui supprime les espaces de ma variable et permet de verifier que mon champ ne soit pas vide */}
+    { postText.trim() != '' && <button onClick={createPostHandler}>Publier</button>
+    
+    }
     </>
   )
 }

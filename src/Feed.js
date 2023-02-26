@@ -5,6 +5,8 @@ import { ReactComponent as EmptyImageSvg } from './images/empty.svg'
 
 function Feed({posts, deletePost}) {
 
+    // afficher les post par ordre de publication grace à la date
+    posts.sort((post1, post2) => post2.date.getTime() -  post1.date.getTime())
 
     return posts.length > 0 ? 
     (

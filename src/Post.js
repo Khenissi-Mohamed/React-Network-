@@ -1,5 +1,5 @@
-
 import { useState } from 'react'
+import moment from 'moment'
 
 function Post({postData, deletePost}) {
 
@@ -14,8 +14,11 @@ function Post({postData, deletePost}) {
 
     return (
       <div>
+        <img src={postData.authorPicture} /><br />
         {postData.author}<br />
+        {moment(postData.date).format('HH:mm')} <br />
         {postData.text}<br />
+        <img src={postData.postPicture} /><br />
         {nbLikes} likes<br />
         <button onClick={likePost}> {isLiked ? "Vous aimez ce post" : "jaime"} </button>
         <button onClick={() => deletePost(postData.id) } >Supprimer le post</button>
