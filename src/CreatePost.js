@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function CreatePost() {
+function CreatePost({addPost}) {
 
 
     const [postText, setPostText] = useState('')
@@ -10,7 +10,13 @@ function CreatePost() {
     //  console.log(event.target.value)
     }
     const createPostHandler = (event) => {
-        console.log("creation de posts", postText)
+      const newPost = {
+        id: Math.floor(1000 * Math.random()) ,
+        text: postText,
+        author: "Nouvel utilisateur",
+        likes: 0
+        }
+      addPost(newPost)
     }
 
   return (
