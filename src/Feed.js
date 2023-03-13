@@ -8,9 +8,12 @@ function Feed({posts, deletePost, isLoading}) {
     // afficher les post par ordre de publication grace à la date
     posts.sort((post1, post2) => post2.date.getTime() -  post1.date.getTime())
 
+    
     return isLoading ?
     (
-    <div>Chargement...</div> 
+
+        <div>Chargement...</div> 
+
     ) : (
 
         posts.length > 0 ? 

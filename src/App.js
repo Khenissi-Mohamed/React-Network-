@@ -3,6 +3,7 @@ import Header from "./Header"
 import Feed from "./Feed"
 import CreatePost from "./CreatePost"
 import {useState, useEffect } from 'react'
+import '../src/styles/App.css'
 
 
 const initialPosts = [
