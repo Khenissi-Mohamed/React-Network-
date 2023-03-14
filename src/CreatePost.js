@@ -25,15 +25,26 @@ function CreatePost({addPost}) {
     }
 
   return (
-    <>
-    <div>Nouveau post</div>
-    Texte : <input onChange={onPostTextHandler} type={postText} value={postText} /> <br />
-    Image : <input onChange={onPictureChangeHandler} type={postText} value={postPicture} />
-    {/* trim() est une fonction js qui supprime les espaces de ma variable et permet de verifier que mon champ ne soit pas vide */}
-    { postText.trim() != '' && <button onClick={createPostHandler}>Publier</button>
-    
-    }
-    </>
+    <div className="post">
+
+      <div className="create-post-row">
+          <div>Text :</div>
+          <input onChange={onPostTextHandler} type="text" value={postText} placeholder="Quoi de neuf aujourd'hui ?" /> 
+      </div>
+      <div className="create-post-row">
+        <div>Photo :</div>
+       <input onChange={onPictureChangeHandler} type="text" value={postPicture} placeholder="URL de votre photo" />
+      </div>
+      {/* trim() est une fonction js qui supprime les espaces de ma variable et permet de verifier que mon champ ne soit pas vide */}
+      { postText.trim() != '' && (
+        <div className="create-post-row">
+        
+        <button className="btn" onClick={createPostHandler}>Publier</button>
+      </div>
+        )
+      }
+
+    </div>
   )
 }
 

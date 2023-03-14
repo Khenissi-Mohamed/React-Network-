@@ -1,15 +1,14 @@
 import { useState } from 'react'
 import moment from 'moment'
 
-function Post({postData, deletePost}) {
+function Post({postData, deletePost, likePost}) {
 
-  const [nbLikes, setNbLikes] = useState(postData.likes)
-  const [isLiked, setisLiked] = useState(false)
+
+  const [showMenu, setShowMenu] = useState(false)
   
-  const likePost = () => {
-    const increment = isLiked ? -1 : 1
-    setNbLikes(nbLikes + increment )
-    setisLiked(!isLiked)
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu)
   }
 
     return (
@@ -24,24 +23,34 @@ function Post({postData, deletePost}) {
               <div className="post-time">{moment(postData.date).format('HH:mm')}</div>
             </div>
             </div>
-          <button onClick={() => deletePost(postData.id) } >Supprimer le post</button>
+
+            <div onClick={toggleMenu} className="post-menu">
+              ...
+              <div className={ showMenu ? "post-popup" : "post-popup hidden"}
+                 onClick={() => deletePost(postData.id) }
+              >
+                Supprimer
+              </div>
+            </div>
+
+          {/* <button >Supprimer le post</button> */}
         </div>
 
         <div className="post-text">
-          {postData.text}<br />
+          {postData.text}
         </div>
 
         <div className="post-picture">
           <img
            src={postData.postPicture} 
-           /><br />
+           />
         </div>
 
         <div className="post-footer">
 
-          <span onClick={likePost} className='post-likes post-liked'>
-            <span>👍</span>
-            <span>{nbLikes}</span>
+          <span onClick={() => likePost(postData.id)} className={ !postData.isLiked ? 'post-likes' : 'post-likes liked'}>
+            <span className='post-thumb'>👍</span>
+            <span>{postData.likes}</span>
           </span>
         </div>
       </div>

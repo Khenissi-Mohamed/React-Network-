@@ -13,7 +13,8 @@ const initialPosts = [
   text: "Bonjour tout le monde !",
   postPicture: 'https://picsum.photos/seed/postpicure-12/500/300',
   date: new Date(Date.now() - 1*3600*1000),
-  likes: 42
+  likes: 42,
+  isLiked : true
   },
   {id: 55,
   author: "Antoine Morin",
@@ -21,7 +22,9 @@ const initialPosts = [
   text: "Comment allez-vous ?",
   postPicture: 'https://picsum.photos/seed/postpicure-18/500/300',
   date: new Date(Date.now() - 2*3600*1000),
-  likes: 35
+  likes: 35,
+  isLiked : true
+
   },
   {id: 90,
   author: "Léa Dumont",
@@ -29,7 +32,9 @@ const initialPosts = [
   text: "Vive React.JS",
   postPicture: 'https://picsum.photos/seed/postpicure-16/500/300',
   date: new Date(Date.now() - 3*3600*1000),
-  likes: 17
+  likes: 17,
+  isLiked : false
+
   },
 ]
 
@@ -81,11 +86,18 @@ function App() {
     // console.log(addPost)
   }
 
+  const likePost = (id) => {
+    const increment = posts.find(p => p.id == id).isLiked ? -1 : 1
+    setPosts(posts.map(p => p.id == id ? {...p, likes: p.likes + increment, isLiked: !p.isLiked } : p))
+  }
+
   return (
     <>
-    <Header />
-    <CreatePost addPost={addPost} />
-    <Feed posts={posts} deletePost={deletePost} isLoading={isLoading} />
+      <Header />
+    <div className="center500px">
+      <CreatePost addPost={addPost} />
+      <Feed posts={posts} deletePost={deletePost} isLoading={isLoading} likePost={likePost} />
+    </div>
     
     </>
   )
